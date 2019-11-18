@@ -1,0 +1,87 @@
+﻿@model StoreManager.Models.StoreViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create";
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $('document').ready(function () {
+
+            myMap({ geo: '@Url.Action("Geocoding", "Stores")', reverse: '@Url.Action("ReverseGeocoding", "Stores")'});
+        });
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<h1>Create</h1>
+
+<h4>Store</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Store.Name" class="control-label"></label>
+                <input asp-for="Store.Name" class="form-control" />
+                <span asp-validation-for="Store.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Company
+                <select asp-for="SelectedCompany" asp-items="Model.Companies"></select>
+                <span asp-validation-for="Store.Company" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Store.Address" class="control-label"></label>
+                <input asp-for="Store.Address" class="form-control" />
+                <span asp-validation-for="Store.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Store.Country" class="control-label"></label>
+                <input asp-for="Store.Country" class="form-control" />
+                <span asp-validation-for="Store.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Store.City" class="control-label"></label>
+                <input asp-for="Store.City" class="form-control" />
+                <span asp-validation-for="Store.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Store.Zip" class="control-label"></label>
+                <input asp-for="Store.Zip" class="form-control" />
+                <span asp-validation-for="Store.Zip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Store.Latitude" class="control-label"></label>
+                <input asp-for="Store.Latitude" class="form-control" />
+                <span asp-validation-for="Store.Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Store.Longitude" class="control-label"></label>
+                <input asp-for="Store.Longitude" class="form-control" />
+                <span asp-validation-for="Store.Longitude" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        <div>
+            <button onclick="UpdateMapASP('@Url.Action("Geocoding", "Stores")')">Update location</button>
+        </div>
+        <div id="map" style="width:100%;height:400px;"></div>
+    </div>
+
+
+
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
